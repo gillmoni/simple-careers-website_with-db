@@ -12,11 +12,16 @@ engine = create_engine(URL,
                          "ssl_ca": "/etc/ssl/cert.pem"
                        }})
 
-#print("type: result", type(result))
-#print("type: result_all", type(result_all))
-#print("type: result_all[0]", type(result_all[0]))
 
-#print("result_dicts:", result_dicts)
-#first_result_dict = result_all[0].__lt__
-#print("type: first_result_dict", type(first_result_dict))
-#print(first_result_dict)
+def list_jobs_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("select * from jobs"))
+    result_all = result.all()
+
+    jobs = []
+    for row in result_all:
+      # use mapping from here
+      # https://stackoverflow.com/questions/1958219/how-to-convert-sqlalchemy-row-object-to-a-python-dict/1958228#1958228
+      jobs.append(row._mapping)
+
+    return list(jobs)
