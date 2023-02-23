@@ -1,10 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy import text
-
-#print(sqlalchemy.__version__)
+import os
 
 # create_engine
-URL = "mysql+pymysql://txm2ie3t5qgljsgnzvfh:pscale_pw_Iu3WakflVl8CCrVGXBoSjjkngq93lcYyWT6qoQNkStS@us-east.connect.psdb.cloud/joviancareers?charset=utf8mb4"
+URL = os.environ['DB_CONNECTION_STRING']
 #Establish connectivity
 engine = create_engine(URL,
                        echo=True,
