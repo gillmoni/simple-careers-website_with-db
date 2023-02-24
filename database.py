@@ -36,4 +36,10 @@ def load_job_from_db(val):
     else:
       # _mapping since sqlalchemy2.0
       return rows[0]._mapping
-   
+
+def add_application_to_db(job_id, data):
+   with engine.connect() as conn:
+     stmt = text(f"INSERT INTO applications (job_id, full_name, email, linkedin_url, education, work_experience, resume_url) \
+            VALUES ( {job_id}, \"{data['full_name']}\", \"{data['email']}\", \"{data['linkedin_url']}\", \"{data['education']}\", \"{data['work_experience']}\", \"{data['resume_url']}\")")
+     result = conn.execute(stmt)
+  

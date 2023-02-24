@@ -1,10 +1,11 @@
 from flask import Flask, render_template
 from flask import jsonify
 
+from flask import request
 from database import engine
 from database import list_jobs_from_db
 from database import load_job_from_db
-
+from database import add_application_to_db
 app = Flask(__name__)
 
 
@@ -25,6 +26,22 @@ def show_job(id):
 @app.route('/api/jobs')
 def list_jobs():
   return jsonify(jobs)
+
+@app.route('/job/<id>/apply', methods=['post'])
+def apply_to_job(id ):
+  data = request.form
+  job = load_job_from_db(id)
+  
+  #store in db
+  add_application_to_db(id, data)
+
+  #send an email
+  #TODO
+  #display an acknowledgement
+  return render_template('application_submitted.html',
+                         application=data,
+                        job=job
+                        )
 
 
 if __name__ == "__main__":
