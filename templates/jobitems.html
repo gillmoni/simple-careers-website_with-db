@@ -1,11 +1,11 @@
 <head>
   <style>
   h2 {
-        font-size: 100px
-        font-family: Roboto;
-        color: rgb(50, 50, 50)
-        text-align: center;
-      }
+      font-size: 100px
+      font-family: Roboto;
+      color: rgb(50, 50, 50)
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -27,7 +27,9 @@
       </div>
   </div>
   <div class="col-4">
+    <a href="/job/{{ job['id'] }}" type="button" class="btn btn-primary float-middle align-middle">
     <button type="button" class="btn btn-primary">Apply</button>
+</a>
   </div>
   </div>
   {% endfor %} 

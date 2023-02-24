@@ -24,3 +24,16 @@ def list_jobs_from_db():
       jobs.append(row._mapping)
 
     return list(jobs)
+
+def load_job_from_db(val):
+  with engine.connect() as conn:
+    stmt = text(f"SELECT * FROM jobs WHERE id = {val}")
+    result = conn.execute(stmt)
+    rows = result.all()
+    
+    if len(rows) == 0:
+      return None
+    else:
+      # _mapping since sqlalchemy2.0
+      return rows[0]._mapping
+   
